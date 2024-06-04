@@ -1,23 +1,41 @@
 package org.sistema.bimba.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Id
-    public Integer id;
+    public Integer code;
 
     @Column
     public String name;
 
-    public Product(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @Column
+    private Float price;
+
+    @Column(name = "price_kg")
+    private Float priceKg;
+
+    @Column
+    private Integer quantity;
+
+    @Column(name = "kg_per_unity")
+    private Float kgPerUnity;
+
+    @Column(name = "kg_open_bag")
+    private Float kgOpenBag;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+
 }
